@@ -1,0 +1,17 @@
+* SQLINGVO.KSQL 🚀
+  #+author: r0man
+  #+LANGUAGE: en
+
+  [[https://clojars.org/sqlingvo.ksql][https://img.shields.io/clojars/v/sqlingvo.ksql.svg]]
+  [[https://travis-ci.org/r0man/sqlingvo.ksql][https://travis-ci.org/r0man/sqlingvo.ksql.svg]]
+  [[https://versions.deps.co/r0man/sqlingvo.ksql][https://versions.deps.co/r0man/sqlingvo.ksql/status.svg]]
+  [[https://versions.deps.co/r0man/sqlingvo.ksql][https://versions.deps.co/r0man/sqlingvo.ksql/downloads.svg]]
+
+  A Clojure DSL to build SQL statements for [[https://ksqldb.io/][KSQL DB]], the event
+  streaming database for stream processing applications.
+
+** License
+
+   Copyright © 2020 [[https://github.com/r0man][r0man]]
+
+   Distributed under the Eclipse Public License, the same as Clojure.
