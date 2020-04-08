@@ -1,4 +1,4 @@
-* SQLINGVO.KSQL 🚀
+* SQLingvo.KSQL 🚀
   #+author: r0man
   #+LANGUAGE: en
 
