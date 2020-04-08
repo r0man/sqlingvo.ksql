@@ -1,4 +1,4 @@
-(defproject sqlingvo.ksql "0.1.0-SNAPSHOT"
+(defproject sqlingvo.ksql "0.1.0"
   :description "A Clojure DSL to build SQL statements for KSQL DB."
   :url "https://github.com/r0man/sqlingvo.ksql"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
