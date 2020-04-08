@@ -1,6 +1,5 @@
 (ns sqlingvo.ksql.utils
-  (:require #?(:clj [cheshire.core :as json])
-            [cats.context :as ctx]
+  (:require [cats.context :as ctx]
             [clojure.spec.alpha :as s]
             [cats.monad.state :as state]
             [clojure.string :as str]))
@@ -49,20 +48,3 @@
 (s/fdef parse-schema
   :args (s/cat :s string?)
   :ret (s/map-of keyword? keyword?))
-
-(defn parse-json [s]
-  (try #?(:clj (json/parse-string s keyword)
-          :cljs (js->clj (js/JSON.parse s) :keywordize-keys true))
-       (catch #?(:clj Exception :cljs js/Error) e
-         (throw (ex-info (str "Can't parse JSON: " s) {:s s} e)))))
-
-(s/fdef parse-json
-  :args (s/cat :s string?))
-
-(defn json-str [x]
-  (try #?(:clj (json/generate-string x)
-          :cljs (js/JSON.stringify (clj->js x)))))
-
-(s/fdef json-str
-  :args (s/cat :x any?)
-  :ret string?)

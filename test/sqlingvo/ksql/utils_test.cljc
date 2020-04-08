@@ -17,7 +17,3 @@
            :longitude {:name :longitude, :type :double}},
           :column-names [:rowtime :rowkey :profile-id :latitude :longitude]}
          (utils/parse-schema schema-str))))
-
-(deftest test-parse-json
-  (let [x {:a 1 :b [2 {:c 3}]}]
-    (is (= x (utils/parse-json (utils/json-str x))))))

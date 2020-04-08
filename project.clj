@@ -11,24 +11,16 @@
                   ["doo" "phantom" "advanced" "once"]
                   ["lint"]]
             "lint" ["do"  ["eastwood"]]}
-  :dependencies [[cheshire "5.10.0"]
-                 [com.stuartsierra/component "1.0.0"]
-                 [funcool/cats "2.3.5"]
-                 [org.clojure/clojure "1.10.1"]
-                 [org.clojure/core.async "1.0.567"]
-                 [org.clojure/tools.logging "1.0.0"]]
-  :plugins [[jonase/eastwood "0.3.10"]
-            [lein-cljsbuild "1.1.7"]
+  :dependencies [[funcool/cats "2.3.6"]
+                 [org.clojure/clojure "1.10.1"]]
+  :plugins [[jonase/eastwood "0.3.11"]
+            [lein-cljsbuild "1.1.8"]
             [lein-difftest "2.0.0"]
             [lein-doo "0.1.11"]]
-  :profiles {:dev {:dependencies [[ch.qos.logback/logback-core "1.2.3"]
-                                  [ch.qos.logback/logback-classic "1.2.3"]
+  :profiles {:dev {:dependencies [[org.clojure/clojurescript "1.10.597"]
                                   [org.clojure/core.rrb-vector "0.1.1"]
-                                  [org.clojure/clojurescript "1.10.597"]
                                   [org.clojure/test.check "1.0.0"]]}
-             :provided {:dependencies [[aleph "0.4.6"]
-                                       [clj-antlr "0.2.5"]
-                                       [clj-http "3.10.0"]]}
+             :provided {:dependencies [[clj-antlr "0.2.5"]]}
              :repl {:source-paths ["dev"]}
              :test {:resource-paths ["test-resources"]}}
   :cljsbuild

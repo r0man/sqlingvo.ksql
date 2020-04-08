@@ -9,11 +9,6 @@
   [statement]
   (-> statement util/ast :db :evaluator))
 
-(defn- ex-info-invalid-evaluator
-  [{:keys [evaluator] :as ast}]
-  (let [sql (compiler/sql ast)]
-    (ex-info (str "SQLINGVO.KSQL Error: Invalid evaluator: " (pr-str evaluator)) {:ast ast})))
-
 (defn- eval-statement
   [statement]
   (let [{:keys [db] :as ast} (util/ast statement)]
