@@ -26,7 +26,7 @@
    :group-by [:expressions]
    :having [:expression]
    :identifier [:identifier]
-   :if-exists [:if-exists]
+   :if-exists [:exists?]
    :insert [:table :columns :values]
    :insert-columns [:elements]
    :join [:type :table :condition]
@@ -254,12 +254,12 @@
 (s/def :sqlingvo.ksql.ast.if-exists/children
   (children :if-exists))
 
-(s/def :sqlingvo.ksql.ast.if-exists/if-exists boolean?)
+(s/def :sqlingvo.ksql.ast.if-exists/exists? boolean?)
 
 (s/def :sqlingvo.ksql.ast/if-exists
   (s/keys :req-un [:sqlingvo.ksql.ast.if-exists/op
                    :sqlingvo.ksql.ast.if-exists/children
-                   :sqlingvo.ksql.ast.if-exists/if-exists]))
+                   :sqlingvo.ksql.ast.if-exists/exists?]))
 
 ;;; Insert Columns
 

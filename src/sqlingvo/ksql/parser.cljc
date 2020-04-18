@@ -223,11 +223,11 @@
 
 (defn if-exists
   "Returns the AST node for an IF EXISTS clause."
-  [if-exists]
-  (node :if-exists :if-exists (true? if-exists)))
+  [exists?]
+  (node :if-exists :exists? (true? exists?)))
 
 (s/fdef if-exists
-  :args (s/cat :if-exists (s/nilable :sqlingvo.ksql.ast.if-exists/if-exists))
+  :args (s/cat :exists? (s/nilable :sqlingvo.ksql.ast.if-exists/exists?))
   :ret ::ast/if-exists)
 
 (defn insert-columns

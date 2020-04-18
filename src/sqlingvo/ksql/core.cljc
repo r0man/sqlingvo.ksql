@@ -230,11 +230,11 @@
 (defn if-exists
   ([]
    (if-exists true))
-  ([if-exists?]
-   (assoc-node (parser/if-exists if-exists?))))
+  ([exists?]
+   (assoc-node (parser/if-exists exists?))))
 
 (s/fdef if-exists
-  :args (s/alt :ary-0 (s/cat) :ary-1 (s/cat :if-exists? (s/nilable boolean?)))
+  :args (s/alt :ary-0 (s/cat) :ary-1 (s/cat :exists? (s/nilable boolean?)))
   :ret ::clause)
 
 (defn insert

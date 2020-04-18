@@ -216,8 +216,8 @@
     (sql-name identifier)
     :else (compile-sql db identifier)))
 
-(defmethod compile-sql :if-exists [db {:keys [if-exists]}]
-  (when if-exists (str " IF EXISTS")))
+(defmethod compile-sql :if-exists [db {:keys [exists?]}]
+  (when exists? (str " IF EXISTS")))
 
 (defmethod compile-sql :insert [db ast]
   (str "INSERT INTO " (compile-children db ast)))
