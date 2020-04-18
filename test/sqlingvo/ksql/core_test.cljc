@@ -6,4 +6,4 @@
 
 (deftest test-auto-offset-rest
   (let [db (sql/auto-offset-rest db :earliest)]
-    (is (= {"sqlingvo.ksql.streams.auto.offset.reset" "earliest"} (:streams-properties db)))))
+    (is (= {"ksql.streams.auto.offset.reset" "earliest"} (:streams-properties db)))))

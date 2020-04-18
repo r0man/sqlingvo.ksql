@@ -15,7 +15,7 @@
   (last (run-statement statement)))
 
 (defn- parse-identifier
-  "Parse the identifier from the SQLINGVO.KSQL header `s`."
+  "Parse the identifier from the KSQL header `s`."
   [s]
   (-> (str/lower-case s)
       (str/replace "_" "-")
@@ -27,7 +27,7 @@
   :ret keyword?)
 
 (defn- parse-attribute
-  "Parse the attribute from the SQLINGVO.KSQL header `s`."
+  "Parse the attribute from the KSQL header `s`."
   [s]
   (let [[column-name column-type] (map parse-identifier (str/split s #"\s+"))]
     {:name column-name
@@ -38,7 +38,7 @@
   :ret (s/map-of keyword? keyword?))
 
 (defn parse-schema
-  "Parse the schema from the SQLINGVO.KSQL header `s`."
+  "Parse the schema from the KSQL header `s`."
   [s]
   (let [columns (map parse-attribute (str/split s #"\s*,\s*"))
         column-names (mapv :name columns)]

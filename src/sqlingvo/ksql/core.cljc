@@ -33,7 +33,7 @@
   (db/db config))
 
 (defn- statement
-  "Return a SQLINGVO.KSQL statement."
+  "Return a statement."
   [node & [body]]
   (map->Statement
    (m/mlet [_ (state/put node)
@@ -69,7 +69,7 @@
   :ret map?)
 
 (defn auto-offset-rest [db value]
-  (assoc-in db [:streams-properties "sqlingvo.ksql.streams.auto.offset.reset"] (name value)))
+  (assoc-in db [:streams-properties "ksql.streams.auto.offset.reset"] (name value)))
 
 (s/fdef auto-offset-rest
   :args (s/cat :db ::db :value ::auto-offset-rest)
