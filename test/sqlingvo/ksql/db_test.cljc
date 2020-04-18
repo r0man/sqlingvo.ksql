@@ -3,4 +3,5 @@
             [sqlingvo.ksql.db :as db]))
 
 (deftest test-db
-  (is (map? (db/db))))
+  (let [db (db/db)]
+    (is (satisfies? db/IEval db ))))
