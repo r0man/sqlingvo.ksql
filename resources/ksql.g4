@@ -76,7 +76,7 @@ query
       (WINDOW  windowExpression)?
       (WHERE where=booleanExpression)?
       (GROUP BY groupBy)?
-      (PARTITION BY partitionBy=booleanExpression)?
+      (PARTITION BY partitionBy)?
       (HAVING having=booleanExpression)?
       (EMIT resultMaterialization)?
       limitClause?
@@ -91,7 +91,7 @@ tableElements
     ;
 
 tableElement
-    : identifier type (KEY)?
+    : identifier type ((PRIMARY)? KEY)?
     ;
 
 tableProperties
@@ -114,21 +114,29 @@ limitClause
     : LIMIT number
     ;
 
+retentionClause
+    : ',' RETENTION number windowUnit
+    ;
+
+gracePeriodClause
+    : ',' GRACE PERIOD number windowUnit
+    ;
+
 windowExpression
     : (IDENTIFIER)?
      ( tumblingWindowExpression | hoppingWindowExpression | sessionWindowExpression )
     ;
 
 tumblingWindowExpression
-    : TUMBLING '(' SIZE number windowUnit')'
+    : TUMBLING '(' SIZE number windowUnit (retentionClause)? (gracePeriodClause)?')'
     ;
 
 hoppingWindowExpression
-    : HOPPING '(' SIZE number windowUnit ',' ADVANCE BY number windowUnit ')'
+    : HOPPING '(' SIZE number windowUnit ',' ADVANCE BY number windowUnit (retentionClause)? (gracePeriodClause)?')'
     ;
 
 sessionWindowExpression
-    : SESSION '(' number windowUnit ')'
+    : SESSION '(' number windowUnit (retentionClause)? (gracePeriodClause)?')'
     ;
 
 windowUnit
@@ -144,26 +152,19 @@ windowUnit
     | MILLISECONDS
     ;
 
+partitionBy
+    : valueExpression (AS? identifier)?
+    ;
+
 groupBy
-    : groupingElement (',' groupingElement)*
-    ;
-
-groupingElement
-    : groupingExpressions                                               #singleGroupingSet
-    ;
-
-groupingExpressions
-    : '(' (expression (',' expression)*)? ')'
-    | expression
+    : valueExpression (AS? identifier)?
+    | valueExpression (',' valueExpression)*
+    | '(' (valueExpression (',' valueExpression)*)? ')' (AS? identifier)?
     ;
 
 values
     : '(' (valueExpression (',' valueExpression)*)? ')'
     ;
-
-/*
- * Dropped `namedQuery` as we don't support them.
- */
 
 selectItem
     : expression (AS? identifier)?  #selectSingle
@@ -172,8 +173,12 @@ selectItem
     ;
 
 relation
-    : left=aliasedRelation joinType JOIN right=aliasedRelation joinWindow? joinCriteria #joinRelation
-    | aliasedRelation                                                                   #relationDefault
+    : left=aliasedRelation joinedSource+  #joinRelation
+    | aliasedRelation                     #relationDefault
+    ;
+
+joinedSource
+    : joinType JOIN aliasedRelation joinWindow? joinCriteria
     ;
 
 joinType
@@ -233,7 +238,7 @@ predicate[ParserRuleContext value]
     : comparisonOperator right=valueExpression                            #comparison
     | NOT? BETWEEN lower=valueExpression AND upper=valueExpression        #between
     | NOT? IN '(' expression (',' expression)* ')'                        #inList
-    | NOT? LIKE pattern=valueExpression									                  #like
+    | NOT? LIKE pattern=valueExpression	(ESCAPE escape=STRING)?   		    #like
     | IS NOT? NULL                                                        #nullPredicate
     | IS NOT? DISTINCT FROM right=valueExpression                         #distinctFrom
     ;
@@ -332,9 +337,10 @@ nonReserved
     | SET | RESET
     | IF
     | SOURCE | SINK
-    | KEY
+    | PRIMARY | KEY
     | EMIT
     | CHANGES
+    | ESCAPE
     ;
 
 EMIT: 'EMIT';
@@ -359,6 +365,7 @@ NOT: 'NOT';
 EXISTS: 'EXISTS';
 BETWEEN: 'BETWEEN';
 LIKE: 'LIKE';
+ESCAPE: 'ESCAPE';
 IS: 'IS';
 NULL: 'NULL';
 TRUE: 'TRUE';
@@ -387,6 +394,9 @@ TUMBLING: 'TUMBLING';
 HOPPING: 'HOPPING';
 SIZE: 'SIZE';
 ADVANCE: 'ADVANCE';
+RETENTION: 'RETENTION';
+GRACE: 'GRACE';
+PERIOD: 'PERIOD';
 CASE: 'CASE';
 WHEN: 'WHEN';
 THEN: 'THEN';
