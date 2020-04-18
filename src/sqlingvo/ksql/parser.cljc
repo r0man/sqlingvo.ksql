@@ -213,11 +213,11 @@
 
 (defn delete-topic
   "Returns the AST node for the DELETE TOPIC clause."
-  [delete-topic]
-  (node :delete-topic :delete-topic (true? delete-topic)))
+  [delete?]
+  (node :delete-topic :delete? (true? delete?)))
 
 (s/fdef delete-topic
-  :args (s/cat :delete-topic (s/nilable :sqlingvo.ksql.ast.delete-topic/delete-topic))
+  :args (s/cat :delete? (s/nilable :sqlingvo.ksql.ast.delete-topic/delete?))
   :fn compileable?
   :ret ::ast/delete-topic)
 

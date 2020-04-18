@@ -174,8 +174,8 @@
 (defmethod compile-sql :struct-type [db {:keys [fields]}]
   (str "STRUCT<" (comma-separated db fields) ">"))
 
-(defmethod compile-sql :delete-topic [db {:keys [delete-topic]}]
-  (when delete-topic (str " DELETE TOPIC")))
+(defmethod compile-sql :delete-topic [db {:keys [delete?]}]
+  (when delete? (str " DELETE TOPIC")))
 
 (defmethod compile-sql :drop-connector [db {:keys [connector]}]
   (str "DROP CONNECTOR " (compile-sql db connector)))

@@ -156,11 +156,11 @@
 (defn delete-topic
   ([]
    (delete-topic true))
-  ([delete-topic?]
-   (assoc-node (parser/delete-topic delete-topic?))))
+  ([delete?]
+   (assoc-node (parser/delete-topic delete?))))
 
 (s/fdef delete-topic
-  :args (s/alt :ary-0 (s/cat) :ary-1 (s/cat :delete-topic? (s/nilable boolean?)))
+  :args (s/alt :ary-0 (s/cat) :ary-1 (s/cat :delete? (s/nilable boolean?)))
   :ret ::clause)
 
 (defn drop-connector

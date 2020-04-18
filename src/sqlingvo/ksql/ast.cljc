@@ -239,12 +239,12 @@
 (s/def :sqlingvo.ksql.ast.delete-topic/children
   (children :delete-topic))
 
-(s/def :sqlingvo.ksql.ast.delete-topic/delete-topic boolean?)
+(s/def :sqlingvo.ksql.ast.delete-topic/delete? boolean?)
 
 (s/def :sqlingvo.ksql.ast/delete-topic
   (s/keys :req-un [:sqlingvo.ksql.ast.delete-topic/op
                    :sqlingvo.ksql.ast.delete-topic/children
-                   :sqlingvo.ksql.ast.delete-topic/delete-topic]))
+                   :sqlingvo.ksql.ast.delete-topic/delete?]))
 
 ;;; If Exists
 
