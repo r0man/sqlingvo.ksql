@@ -41,7 +41,7 @@
    :query [:select-items :from :where :join :window :group-by :partition-by :having :emit :limit]
    :relation [:aliased-relation]
    :relation-primary [:source-name]
-   :result-materialization [:result-materialization]
+   :result-materialization [:type]
    :select-item [:expression]
    :select-items [:items]
    :show [:type]
@@ -207,13 +207,13 @@
 (s/def :sqlingvo.ksql.ast.result-materialization/children
   (children :result-materialization))
 
-(s/def :sqlingvo.ksql.ast.result-materialization/result-materialization
+(s/def :sqlingvo.ksql.ast.result-materialization/type
   #{:changes})
 
 (s/def :sqlingvo.ksql.ast/result-materialization
   (s/keys :req-un [:sqlingvo.ksql.ast.result-materialization/op
                    :sqlingvo.ksql.ast.result-materialization/children
-                   :sqlingvo.ksql.ast.result-materialization/result-materialization]))
+                   :sqlingvo.ksql.ast.result-materialization/type]))
 
 ;;; Emit
 

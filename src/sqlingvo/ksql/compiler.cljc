@@ -192,8 +192,8 @@
 (defmethod compile-sql :group-by [db {:keys [expressions]}]
   (str " GROUP BY " (comma-separated db expressions)))
 
-(defmethod compile-sql :result-materialization [db {:keys [result-materialization]}]
-  (str/upper-case (name result-materialization)))
+(defmethod compile-sql :result-materialization [db {:keys [type]}]
+  (str/upper-case (name type)))
 
 (defmethod compile-sql :emit [db ast]
   (str " EMIT " (compile-children db ast)))

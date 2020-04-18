@@ -193,11 +193,11 @@
 
 (defn result-materialization
   "Returns the AST node for the RESULT MATERIALIZATION clause."
-  [result-materialization]
-  (node :result-materialization :result-materialization result-materialization))
+  [type]
+  (node :result-materialization :type type))
 
 (s/fdef result-materialization
-  :args (s/cat :result-materialization :sqlingvo.ksql.ast.result-materialization/result-materialization)
+  :args (s/cat :type :sqlingvo.ksql.ast.result-materialization/type)
   :fn compileable?
   :ret ::ast/result-materialization)
 
@@ -207,7 +207,7 @@
   (node :emit :result-materialization (result-materialization materialization)))
 
 (s/fdef emit
-  :args (s/cat :materialization :sqlingvo.ksql.ast.result-materialization/result-materialization)
+  :args (s/cat :materialization :sqlingvo.ksql.ast.result-materialization/type)
   :fn compileable?
   :ret ::ast/emit)
 
