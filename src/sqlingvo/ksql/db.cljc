@@ -2,6 +2,7 @@
   (:require [sqlingvo.ksql.compiler :as compiler]))
 
 (defprotocol IEval
+  :extend-via-metadata true
   (-eval [evaluator statement opts]
     "Evaluate the `statement` via `evaluator` using `opts`."))
 
